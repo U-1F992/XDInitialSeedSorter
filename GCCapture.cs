@@ -8,6 +8,9 @@ using OpenCvSharp.Extensions;
 public class GCCapture : IDisposable
 {
     private VideoCapture _videoCapture;
+    private Thread _threadUpdate;
+    private bool _showImage;
+    private bool _continueUpdateing = true;
     private string _tesseract;
     private Dictionary<string, Setting.Rect> _crops;
     
@@ -21,10 +24,11 @@ public class GCCapture : IDisposable
     {
         this._tesseract = setting.binaries.tesseractOCR;
         this._crops = setting.crops;
+        this._showImage = setting.devices.capture.showImage;
 
         try
         {
-            this._videoCapture = new VideoCapture(setting.devices.capture.index, VideoCaptureAPIs.DSHOW);
+            this._videoCapture = new VideoCapture(setting.devices.capture.index);
             if (!_videoCapture.IsOpened())
             {
                 _videoCapture.Release();
@@ -37,6 +41,9 @@ public class GCCapture : IDisposable
         {
             throw new Exception("キャプチャデバイスを取得できませんでした。");
         }
+
+        this._threadUpdate = new Thread(new ThreadStart(this.UpdateFrame));
+        _threadUpdate.Start();
     }
 
     /// <summary>
@@ -45,13 +52,13 @@ public class GCCapture : IDisposable
     /// <returns>Matオブジェクト</returns>
     Mat GetImage()
     {
-        // thrown away to update cache
-        _videoCapture.Read(new Mat());
-
         Mat frame = new Mat();
-        if (!_videoCapture.Read(frame))
+        lock (_videoCapture)
         {
-            throw new Exception("キャプチャデバイスから画像を取得できませんでした。");
+            if (!_videoCapture.Read(frame))
+            {
+                throw new Exception("キャプチャデバイスから画像を取得できませんでした。");
+            }
         }
         return frame;
     }
@@ -156,8 +163,37 @@ public class GCCapture : IDisposable
             if (disposing)
             {
                 _videoCapture.Dispose();
+                _continueUpdateing = false;
+                _threadUpdate.Join();
             }
             _disposed = true;
+        }
+    }
+
+    private void UpdateFrame()
+    {
+        Mat frame = new Mat();
+        Window? window;
+        if (_showImage) {
+            window = new Window("XDInitialSeedSorter");
+        }
+        else {
+            window = null;
+        }
+
+        while (_continueUpdateing)
+        {
+            lock (_videoCapture)
+            {
+                if (!_videoCapture.Read(frame)) continue;
+            }
+            
+            if (window != null)
+            {
+                Cv2.Resize(frame, frame, new Size(640, 480));
+                window.ShowImage(frame);
+                Cv2.WaitKey(1);
+            }
         }
     }
 }

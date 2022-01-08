@@ -34,6 +34,7 @@ public class Setting
             public int index { get; set; }
             public int width { get; set; }
             public int height { get; set; }
+            public bool showImage { get; set; }
         }
     }
 

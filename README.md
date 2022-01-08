@@ -53,7 +53,8 @@ Edit the contents of `setting.json` as necessary.
         "capture": {
             "index": 0,
             "width": 1600,
-            "height": 1200
+            "height": 1200,
+            "showImage": true
         }
     },
     // 各要素の切り取り範囲を設定します。
