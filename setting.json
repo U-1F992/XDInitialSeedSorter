@@ -1,0 +1,63 @@
+{
+    "pokemonXD": {
+        "targets": [
+            1364174178,
+            235987496,
+            3089508904
+        ],
+        "leftover": 500000,
+        "consumptionPerSec": 3713.6
+    },
+    "binaries": {
+        "tesseractOCR": "tesseract",
+        "xdDatabase": "XDDatabase"
+    },
+    "devices": {
+        "controller": {
+            "port": "COM6"
+        },
+        "capture": {
+            "index": 0,
+            "width": 1600,
+            "height": 1200
+        }
+    },
+    "crops": {
+        "player": {
+            "width": 215,
+            "height": 53,
+            "x": 324,
+            "y": 650
+        },
+        "com": {
+            "width": 215,
+            "height": 53,
+            "x": 999,
+            "y": 650
+        },
+        "hp_1": {
+            "width": 130,
+            "height": 50,
+            "x": 409,
+            "y": 760
+        },
+        "hp_2": {
+            "width": 130,
+            "height": 50,
+            "x": 409,
+            "y": 993
+        },
+        "hp_3": {
+            "width": 130,
+            "height": 50,
+            "x": 1088,
+            "y": 760
+        },
+        "hp_4": {
+            "width": 130,
+            "height": 50,
+            "x": 1088,
+            "y": 993
+        }
+    }
+}
