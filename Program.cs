@@ -53,5 +53,9 @@ public class Program
                 }
             }
         }
+
+        pkmnXD.Dispose();
+        Console.WriteLine("Press any key to exit.");
+        Console.ReadKey();
     }
 }
