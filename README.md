@@ -32,9 +32,7 @@ Edit the contents of `setting.json` as necessary.
     "pokemonXD": {
         // 目標seedを10進数で列挙します。
         "targets": [
-            1364174178,
-            235987496,
-            3089508904
+            195951310 // 0xbadface
         ],
         // 強制消費を考慮して余分に残す消費数を指定します。
         "leftover": 500000,
