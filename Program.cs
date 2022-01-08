@@ -1,13 +1,16 @@
 ﻿using System.Text.Json;
+using Pastel;
 
 public class Program
 {
     public static void Main(string[] args)
     {
+        Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+        ConsoleExtensions.Enable();
+
         XDConnecter pkmnXD;
         try
         {
-            Directory.SetCurrentDirectory(AppContext.BaseDirectory);
             pkmnXD = new XDConnecter(JsonSerializer.Deserialize<Setting>(File.ReadAllText("setting.json")));
         }
         catch (Exception e)
