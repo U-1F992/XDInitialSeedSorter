@@ -21,6 +21,7 @@ public partial class XDConnecter : IDisposable
 
     public void ClearScreen()
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
         string ESC = Char.ConvertFromUtf32(27);
         Console.WriteLine("{0}[0;0H{0}[J", ESC);
         Console.WriteLine("                 {0}[31m_{0}[0m      {0}[31;40m--{0}[0m", ESC);

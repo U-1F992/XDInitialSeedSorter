@@ -69,7 +69,7 @@ public class GCCapture : IDisposable
         // BitmapConverter.ToBitmap(frame).Save(DateTime.Now.ToString("yyyyMMddHHmmss") + ".png");
 
         Dictionary<string, int> pair = new Dictionary<string, int>();
-        foreach(var range in _crops)
+        Parallel.ForEach(_crops, range =>
         {
             using (Mat img = new Mat(frame, new Rect(range.Value.x, range.Value.y, range.Value.width, range.Value.height)))
             {
@@ -77,7 +77,7 @@ public class GCCapture : IDisposable
                 Cv2.BitwiseNot(img, img);
                 Cv2.Threshold(img, img, 127, 255, ThresholdTypes.Binary);
                 Cv2.Resize(img, img, new Size(), 2, 2);
-                BitmapConverter.ToBitmap(img).Save(".tmp.png");
+                BitmapConverter.ToBitmap(img).Save(".tmp"+range.Key+".png");
             }
 
             string lang;
@@ -93,7 +93,7 @@ public class GCCapture : IDisposable
             string raw;
             try
             {
-                using (Process? process = Process.Start(new ProcessStartInfo() {FileName = _tesseract, Arguments = ".tmp.png stdout -l "+lang+" --psm 8", UseShellExecute = false, StandardOutputEncoding = Encoding.UTF8, RedirectStandardOutput = true, RedirectStandardError = true}))
+                using (Process? process = Process.Start(new ProcessStartInfo() {FileName = _tesseract, Arguments = ".tmp"+range.Key+".png stdout -l "+lang+" --psm 8", UseShellExecute = false, StandardOutputEncoding = Encoding.UTF8, RedirectStandardOutput = true, RedirectStandardError = true}))
                 {
                     if (process == null) throw new Exception("\"" + _tesseract + "\" は開始しませんでした。");
                     process.WaitForExit();
@@ -106,7 +106,7 @@ public class GCCapture : IDisposable
             }
             finally
             {
-                System.IO.File.Delete(".tmp.png");
+                System.IO.File.Delete(".tmp"+range.Key+".png");
             }
 
             if (range.Key.Contains("hp_"))
@@ -127,7 +127,7 @@ public class GCCapture : IDisposable
                 }
                 pair.Add(range.Key, GetClosestIndex(raw, samples));
             }
-        }
+        });
 
         return new QuickBattleData(new int[] {pair["player"], pair["com"]}, new int[] {pair["hp_1"], pair["hp_2"], pair["hp_3"], pair["hp_4"]});
     }

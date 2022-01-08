@@ -7,6 +7,7 @@ public class Program
     {
         Directory.SetCurrentDirectory(AppContext.BaseDirectory);
         ConsoleExtensions.Enable();
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
 
         XDConnecter pkmnXD;
         try
@@ -33,7 +34,7 @@ public class Program
 
                 waitingTime = pkmnXD.GetShortestWaitingTime();
                 count++;
-                
+
             } while (waitingTime > TimeSpan.Parse("03:00:00"));
 
             Console.WriteLine("Suitable seed is found!");
