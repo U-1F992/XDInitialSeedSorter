@@ -23,7 +23,6 @@ public partial class XDConnecter : IDisposable
     {
         string ESC = Char.ConvertFromUtf32(27);
         Console.WriteLine("{0}[0;0H{0}[J", ESC);
-        Console.WriteLine("");
         Console.WriteLine("                 {0}[31m_{0}[0m      {0}[31;40m--{0}[0m", ESC);
         Console.WriteLine("{0}[0m                 {0}[31;40m\\ \\{0}[0m  {0}[31;40m / /{0}[0m", ESC);
         Console.WriteLine("{0}[0m  {0}[34;43m┏━┓{0}[0m {0}[34;43m┏┓┏━┓{0}[0m       {0}[31;40m\\ \\_/ /{0}[0m {0}[31m____{0}[0m", ESC);
@@ -122,6 +121,7 @@ public partial class XDConnecter : IDisposable
 
         } while (candidates.Count != 1);
         
+        Console.WriteLine("");
         Console.WriteLine("Current seed: " + Convert.ToString(candidates[0], 16));
         Console.WriteLine("");
         return candidates[0];
@@ -131,11 +131,10 @@ public partial class XDConnecter : IDisposable
     /// Get current seed after reset.
     /// </summary>
     /// <returns>Current seed</returns>
-    public UInt32 GetNextCurrentSeed()
+    public UInt32 GetNextInitialSeed()
     {
         // Lead to the first page
         // 「いますぐバトル > さいきょう」
-        Console.WriteLine("Reset");
         _controller.Reset(15000);
         _controller.InvokeSequence(new GCOperation[]
         {
@@ -151,24 +150,9 @@ public partial class XDConnecter : IDisposable
         return GetCurrentSeed();
     }
 
-    /// <summary>
-    /// リセット後の初期seedからtargetsの各seedまでの待機時間で、最も短いものを返します。
-    /// </summary>
-    /// <returns>TimeSpanオブジェクト</returns>
-    public TimeSpan GetShortestWaitingTime()
+    public Dictionary<UInt32, TimeSpan> GetWaitingTimes(UInt32 currentSeed)
     {
         Setting.PokemonXD setting = _setting.pokemonXD;
-
-        UInt32 currentSeed;
-        try
-        {
-            currentSeed = GetNextCurrentSeed();
-        }
-        catch
-        {
-            Console.WriteLine("No candidates were found.");
-            return TimeSpan.MaxValue;
-        }
 
         Dictionary<UInt32, TimeSpan> result = new Dictionary<UInt32, TimeSpan>();
         foreach (UInt32 target in setting.targets)
@@ -193,6 +177,26 @@ public partial class XDConnecter : IDisposable
             toShow += (seed + new string(' ', 10 - seed.Length) + pair.Value.ToString(@"d\.hh\:mm\:ss") + "\n");
         }
         Console.WriteLine(toShow);
+
+        return result;
+    }
+
+    /// <summary>
+    /// リセット後の初期seedからtargetsの各seedまでの待機時間で、最も短いものを返します。
+    /// </summary>
+    /// <returns>TimeSpanオブジェクト</returns>
+    public TimeSpan GetShortestWaitingTime()
+    {
+        Dictionary<UInt32, TimeSpan> result;
+        try
+        {
+            result = GetWaitingTimes(GetNextInitialSeed());
+        }
+        catch
+        {
+            Console.WriteLine("No candidates were found.");
+            return TimeSpan.MaxValue;
+        }
 
         foreach (var pair in result.OrderBy(pair => pair.Value))
         {
@@ -236,7 +240,6 @@ public partial class XDConnecter : IDisposable
         Console.WriteLine("Consumption complete.");
         Console.WriteLine("");
 
-        GetCurrentSeed();
         return;
     }
 

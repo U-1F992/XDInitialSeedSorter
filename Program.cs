@@ -28,9 +28,12 @@ public class Program
             do
             {
                 pkmnXD.ClearScreen();
-                Console.WriteLine("Attempt: {0}", count);
+                Console.WriteLine("--- Attempt: {0} ---", count);
+                Console.WriteLine("");
+
                 waitingTime = pkmnXD.GetShortestWaitingTime();
                 count++;
+                
             } while (waitingTime > TimeSpan.Parse("03:00:00"));
 
             Console.WriteLine("Suitable seed is found!");
@@ -39,6 +42,7 @@ public class Program
                 try
                 {
                     pkmnXD.InvokeRoughConsumption(waitingTime - TimeSpan.Parse("00:05:00"));
+                    pkmnXD.GetWaitingTimes(pkmnXD.GetCurrentSeed());
                     break;
                 }
                 catch
