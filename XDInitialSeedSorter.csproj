@@ -17,8 +17,6 @@
     <PackageReference Include="System.IO.Ports" Version="6.0.0" />
     
     <None Update="setting.json" CopyToOutputDirectory="Always" />
-    <None Update="xdn.traineddata" CopyToOutputDirectory="Always" />
-    <None Update="xdj.traineddata" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
 </Project>
