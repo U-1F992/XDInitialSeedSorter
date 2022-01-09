@@ -34,6 +34,11 @@ public class GCCapture : IDisposable
                 _videoCapture.Release();
                 throw new Exception();
             }
+            if (!_videoCapture.Read(new Mat()))
+            {
+                _videoCapture.Release();
+                throw new Exception();
+            }
             _videoCapture.FrameWidth = setting.devices.capture.width;
             _videoCapture.FrameHeight = setting.devices.capture.height;
         }
@@ -162,9 +167,9 @@ public class GCCapture : IDisposable
         {
             if (disposing)
             {
-                _videoCapture.Dispose();
                 _continueUpdateing = false;
                 _threadUpdate.Join();
+                _videoCapture.Dispose();
             }
             _disposed = true;
         }
