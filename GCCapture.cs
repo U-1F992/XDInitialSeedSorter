@@ -11,6 +11,7 @@ public class GCCapture : IDisposable
     private Thread _threadUpdate;
     private bool _showImage;
     private bool _continueUpdateing = true;
+    private Mat _frame = new Mat();
     private string _tesseract;
     private Dictionary<string, Setting.Rect> _crops;
     
@@ -34,6 +35,7 @@ public class GCCapture : IDisposable
                 _videoCapture.Release();
                 throw new Exception();
             }
+
             _videoCapture.FrameWidth = setting.devices.capture.width;
             _videoCapture.FrameHeight = setting.devices.capture.height;
         }
@@ -52,15 +54,10 @@ public class GCCapture : IDisposable
     /// <returns>Matオブジェクト</returns>
     Mat GetImage()
     {
-        Mat frame = new Mat();
-        lock (_videoCapture)
+        lock (_frame)
         {
-            if (!_videoCapture.Read(frame))
-            {
-                throw new Exception("キャプチャデバイスから画像を取得できませんでした。");
-            }
+            return _frame;
         }
-        return frame;
     }
 
     public QuickBattleData GetQuickBattleData()
@@ -172,7 +169,7 @@ public class GCCapture : IDisposable
 
     private void UpdateFrame()
     {
-        Mat frame = new Mat();
+        Mat resized = new Mat();
         Window? window;
         if (_showImage) {
             window = new Window("XDInitialSeedSorter");
@@ -183,16 +180,15 @@ public class GCCapture : IDisposable
 
         while (_continueUpdateing)
         {
-            lock (_videoCapture)
+            lock (_frame)
             {
-                if (!_videoCapture.Read(frame)) continue;
-            }
-            
-            if (window != null)
-            {
-                Cv2.Resize(frame, frame, new Size(640, 480));
-                window.ShowImage(frame);
-                Cv2.WaitKey(1);
+                _videoCapture.Read(_frame);
+                if (window != null)
+                {
+                    Cv2.Resize(_frame, resized, new Size(640, 480));
+                    window.ShowImage(resized);
+                    Cv2.WaitKey(1);
+                }
             }
         }
         if (window != null) window.Dispose();
