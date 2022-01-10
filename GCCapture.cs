@@ -182,7 +182,7 @@ public class GCCapture : IDisposable
         {
             lock (_frame)
             {
-                _videoCapture.Read(_frame);
+                if(!_videoCapture.Read(_frame)) continue;
                 if (window != null)
                 {
                     Cv2.Resize(_frame, resized, new Size(640, 480));
