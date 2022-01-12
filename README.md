@@ -45,9 +45,11 @@ Edit the contents of `setting.json` as necessary.
         "xdDatabase": "XDDatabase"
     },
     "devices": {
-        // コントローラーに使用するArduinoのポートを指定します。
         "controller": {
+            // コントローラーに使用するArduinoのポートを指定します。
             "port": "COM6"
+            // ソフトリセット後の待機時間を指定します。
+            "delayAfterReset": 15000
         },
         // カメラ番号と解像度を指定します。解像度を変更した場合は切り取り範囲の較正が必要になるでしょう。
         "capture": {
