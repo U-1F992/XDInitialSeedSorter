@@ -27,6 +27,7 @@ public class Setting
         public class Controller
         {
             public string port { get; set; }
+            public int delayAfterReset { get; set; }
         }
 
         public class Capture

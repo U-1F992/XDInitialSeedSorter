@@ -12,7 +12,8 @@
     },
     "devices": {
         "controller": {
-            "port": "COM6"
+            "port": "COM6",
+            "delayAfterReset": 15000
         },
         "capture": {
             "index": 0,

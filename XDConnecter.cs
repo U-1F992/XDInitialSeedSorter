@@ -7,6 +7,7 @@ public partial class XDConnecter : IDisposable
     private Setting _setting;
     private GCController _controller;
     private GCCapture _capture;
+    private int _delayAfterReset;
 
     private bool _disposed = false;
 
@@ -17,6 +18,8 @@ public partial class XDConnecter : IDisposable
         this._setting = VerifySetting(setting);
         this._controller = new GCController(_setting);
         this._capture = new GCCapture(_setting);
+
+        this._delayAfterReset = _setting.devices.controller.delayAfterReset;
     }
 
     public void ClearScreen()
@@ -136,7 +139,7 @@ public partial class XDConnecter : IDisposable
     {
         // Lead to the first page
         // 「いますぐバトル > さいきょう」
-        _controller.Reset(15000);
+        _controller.Reset(_delayAfterReset);
         _controller.InvokeSequence(new GCOperation[]
         {
             new GCOperation(GCButton.A, 200, 19000),
