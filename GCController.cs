@@ -90,7 +90,13 @@ public class GCController : IDisposable
     {
         try
         {
-            if (c != "") _serialPort.WriteLine(c.Substring(0, 1));
+            if (c != "") 
+            {
+#if DEBUG
+                Console.WriteLine("{0}[33mGCController.Write(\"{1}\", {2}){0}[0m", Char.ConvertFromUtf32(27), c.Substring(0, 1), delay);
+#endif
+                _serialPort.WriteLine(c.Substring(0, 1));
+            }
         }
         catch
         {
