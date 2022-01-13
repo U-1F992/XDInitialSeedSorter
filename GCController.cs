@@ -12,6 +12,11 @@ public class GCButton
         this.Up = up;
     }
 
+    public string ToJson()
+    {
+        return "{\"Name\":\"" + Name + "\",\"Down\":\"" + Down + "\",\"Up\":\"" + Up + "\"}";
+    }
+
     public static GCButton A { get; } = new GCButton("A", "a", "m");
     public static GCButton B { get; } = new GCButton("B", "b", "n");
     public static GCButton X { get; } = new GCButton("X", "c", "o");
@@ -36,6 +41,11 @@ public class GCOperation
         this.Button = button;
         this.Duration = duration;
         this.Delay = delay;
+    }
+
+    public string ToJson()
+    {
+        return "{\"Button\":" + Button.ToJson() + ",\"Duration\":" + Duration + ",\"Delay\":" + Delay + "}";
     }
 
     public static GCOperation PressA { get; } = new GCOperation(GCButton.A, 150, 200);
@@ -92,9 +102,6 @@ public class GCController : IDisposable
         {
             if (c != "") 
             {
-#if DEBUG
-                Console.WriteLine("{0}[33mGCController.Write(\"{1}\", {2}){0}[0m", Char.ConvertFromUtf32(27), c.Substring(0, 1), delay);
-#endif
                 _serialPort.WriteLine(c.Substring(0, 1));
             }
         }
@@ -129,6 +136,9 @@ public class GCController : IDisposable
     /// <param name="operation">A GCOperation object.</param>
     public void InvokeOperation(GCOperation operation)
     {
+#if DEBUG
+        Console.WriteLine("{0}[33mGCController.InvokeOperation({1}){0}[0m", Char.ConvertFromUtf32(27), operation.ToJson());
+#endif
         Write(operation.Button.Down, operation.Duration);
         Write(operation.Button.Up, operation.Delay);
     }
