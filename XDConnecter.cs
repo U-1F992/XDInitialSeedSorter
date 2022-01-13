@@ -145,7 +145,7 @@ public partial class XDConnecter : IDisposable
             new GCOperation(GCButton.A, 50, 19000),
             new GCOperation(GCButton.A, 50, 1800),
             new GCOperation(GCButton.A, 50, 1200),
-            new GCOperation(GCButton.dR, 50, 500),
+            new GCOperation(GCButton.dR, 50, 1000),
             new GCOperation(GCButton.A, 50, 1500),
             new GCOperation(GCButton.A, 50, 2500),
             new GCOperation(GCButton.A, 50, 500)
