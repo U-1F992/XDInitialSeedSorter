@@ -38,18 +38,18 @@ public class GCOperation
         this.Delay = delay;
     }
 
-    public static GCOperation PressA { get; } = new GCOperation(GCButton.A, 200, 200);
-    public static GCOperation PressB { get; } = new GCOperation(GCButton.B, 200, 200);
-    public static GCOperation PressX { get; } = new GCOperation(GCButton.X, 200, 200);
-    public static GCOperation PressY { get; } = new GCOperation(GCButton.Y, 200, 200);
-    public static GCOperation PressL { get; } = new GCOperation(GCButton.L, 200, 200);
-    public static GCOperation PressR { get; } = new GCOperation(GCButton.R, 200, 200);
-    public static GCOperation PressZ { get; } = new GCOperation(GCButton.Z, 200, 200);
-    public static GCOperation PressSt { get; } = new GCOperation(GCButton.St, 200, 200);
-    public static GCOperation PressdL { get; } = new GCOperation(GCButton.dL, 200, 200);
-    public static GCOperation PressdR { get; } = new GCOperation(GCButton.dR, 200, 200);
-    public static GCOperation PressdD { get; } = new GCOperation(GCButton.dD, 200, 200);
-    public static GCOperation PressdU { get; } = new GCOperation(GCButton.dU, 200, 200);
+    public static GCOperation PressA { get; } = new GCOperation(GCButton.A, 150, 200);
+    public static GCOperation PressB { get; } = new GCOperation(GCButton.B, 150, 200);
+    public static GCOperation PressX { get; } = new GCOperation(GCButton.X, 150, 200);
+    public static GCOperation PressY { get; } = new GCOperation(GCButton.Y, 150, 200);
+    public static GCOperation PressL { get; } = new GCOperation(GCButton.L, 150, 200);
+    public static GCOperation PressR { get; } = new GCOperation(GCButton.R, 150, 200);
+    public static GCOperation PressZ { get; } = new GCOperation(GCButton.Z, 150, 200);
+    public static GCOperation PressSt { get; } = new GCOperation(GCButton.St, 150, 200);
+    public static GCOperation PressdL { get; } = new GCOperation(GCButton.dL, 150, 200);
+    public static GCOperation PressdR { get; } = new GCOperation(GCButton.dR, 150, 200);
+    public static GCOperation PressdD { get; } = new GCOperation(GCButton.dD, 150, 200);
+    public static GCOperation PressdU { get; } = new GCOperation(GCButton.dU, 150, 200);
 }
 
 public class GCController : IDisposable
