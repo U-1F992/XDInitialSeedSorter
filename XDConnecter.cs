@@ -102,9 +102,9 @@ public partial class XDConnecter : IDisposable
 
         _controller.InvokeSequence(new GCOperation[]
         {
-            new GCOperation(GCButton.A, 150, 1000),
-            new GCOperation(GCButton.B, 150, 500),
-            new GCOperation(GCButton.A, 150, 1000)
+            new GCOperation(GCButton.A, 50, 1000),
+            new GCOperation(GCButton.B, 50, 500),
+            new GCOperation(GCButton.A, 50, 1000)
         });
         data1 = _capture.GetQuickBattleData();
         Console.WriteLine("Receive QuickBattleData: " + data1.ToJson());
@@ -113,8 +113,8 @@ public partial class XDConnecter : IDisposable
         {
             _controller.InvokeSequence(new GCOperation[]
             {
-                new GCOperation(GCButton.B, 150, 500),
-                new GCOperation(GCButton.A, 150, 1000)
+                new GCOperation(GCButton.B, 50, 500),
+                new GCOperation(GCButton.A, 50, 1000)
             });
             data2 = _capture.GetQuickBattleData();
             Console.WriteLine("Receive QuickBattleData: " + data2.ToJson());
@@ -142,13 +142,13 @@ public partial class XDConnecter : IDisposable
         _controller.Reset(_delayAfterReset);
         _controller.InvokeSequence(new GCOperation[]
         {
-            new GCOperation(GCButton.A, 150, 19000),
-            new GCOperation(GCButton.A, 150, 1800),
-            new GCOperation(GCButton.A, 150, 1200),
-            GCOperation.PressdR,
-            new GCOperation(GCButton.A, 150, 1500),
-            new GCOperation(GCButton.A, 150, 2500),
-            new GCOperation(GCButton.A, 150, 500)
+            new GCOperation(GCButton.A, 50, 19000),
+            new GCOperation(GCButton.A, 50, 1800),
+            new GCOperation(GCButton.A, 50, 1200),
+            new GCOperation(GCButton.dR, 50, 500),
+            new GCOperation(GCButton.A, 50, 1500),
+            new GCOperation(GCButton.A, 50, 2500),
+            new GCOperation(GCButton.A, 50, 500)
         });
 
         return GetCurrentSeed();
@@ -222,8 +222,8 @@ public partial class XDConnecter : IDisposable
         {
             _controller.InvokeSequence(new GCOperation[]
             {
-                new GCOperation(GCButton.B, 150, 500),
-                new GCOperation(GCButton.A, 150, 1000)
+                new GCOperation(GCButton.B, 50, 500),
+                new GCOperation(GCButton.A, 50, 1000)
             });
 
             data = _capture.GetQuickBattleData();
@@ -238,8 +238,8 @@ public partial class XDConnecter : IDisposable
         {
             GCOperation.PressSt,
             GCOperation.PressdD,
-            new GCOperation(GCButton.A, 150, 12000),
-            new GCOperation(GCButton.B, 150, 5000)
+            new GCOperation(GCButton.A, 50, 12000),
+            new GCOperation(GCButton.B, 50, 5000)
         });
         Console.WriteLine("Consumption complete.");
         Console.WriteLine("");

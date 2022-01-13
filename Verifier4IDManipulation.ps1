@@ -13,7 +13,7 @@ do {
     Write-Host "--- Attempt: $count ---"
     Write-Host ""
 
-    .\XDInitialSeedSorter.exe | Out-File result.txt
+    .\XDInitialSeedSorter.exe | Tee-Object result.txt
 
     [string] $result = (Get-Content result.txt)
     [string[]] $seeds = [RegEx]::Matches($result, "Current seed: [0123456789abcdefABCDEF]{0,8}")
