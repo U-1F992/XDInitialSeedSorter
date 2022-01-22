@@ -24,6 +24,9 @@ public class Program
         long count = 1;
         TimeSpan waitingTime;
 
+        UInt32 currentSeed;
+        UInt32 targetSeed;
+
         while (true)
         {
             do
@@ -43,7 +46,8 @@ public class Program
                 try
                 {
                     pkmnXD.InvokeRoughConsumption(waitingTime - TimeSpan.Parse("00:05:00"));
-                    pkmnXD.GetWaitingTimes(pkmnXD.GetCurrentSeed());
+                    currentSeed = pkmnXD.GetCurrentSeed();
+                    targetSeed = pkmnXD.GetWaitingTimes(currentSeed).OrderBy(pair => pair.Value).First().Key;
                     break;
                 }
                 catch
@@ -55,5 +59,7 @@ public class Program
         }
 
         pkmnXD.Dispose();
+
+        Console.WriteLine("{{\"currentSeed\":{0},\"targetSeed\":{1}}}", currentSeed, targetSeed);
     }
 }

@@ -107,7 +107,7 @@ public partial class XDConnecter : IDisposable
             new GCOperation(GCButton.A, 50, 1000)
         });
         data1 = _capture.GetQuickBattleData();
-        Console.WriteLine("Receive QuickBattleData: " + data1.ToJson());
+        Console.WriteLine(data1.ToJson());
 
         do
         {
@@ -117,7 +117,7 @@ public partial class XDConnecter : IDisposable
                 new GCOperation(GCButton.A, 50, 1000)
             });
             data2 = _capture.GetQuickBattleData();
-            Console.WriteLine("Receive QuickBattleData: " + data2.ToJson());
+            Console.WriteLine(data2.ToJson());
 
             candidates = GetCandidatesFromQuickBattleData(data1, data2);
             

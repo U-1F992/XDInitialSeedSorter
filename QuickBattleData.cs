@@ -13,6 +13,6 @@
     }
     public string ToJson()
     {
-        return "{\"HP\":[" + Party[0] + "," + Party[1] + "],\"Party\":[" + HP[0] + "," + HP[1] + "," + HP[2] + "," + HP[3] + "]}";
+        return "{\"party\":[" + Party[0] + "," + Party[1] + "],\"hp\":[" + HP[0] + "," + HP[1] + "," + HP[2] + "," + HP[3] + "]}";
     }
 }
