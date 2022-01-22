@@ -5,7 +5,7 @@ using PokemonPRNG.LCG32.GCLCG;
 public partial class XDConnecter : IDisposable
 {
     private Setting _setting;
-    private GCController _controller;
+    private XDController _controller;
     private GCCapture _capture;
     private int _delayAfterReset;
 
@@ -16,7 +16,7 @@ public partial class XDConnecter : IDisposable
         ClearScreen();
 
         this._setting = VerifySetting(setting);
-        this._controller = new GCController(_setting);
+        this._controller = new XDController(_setting);
         this._capture = new GCCapture(_setting);
 
         this._delayAfterReset = _setting.devices.controller.delayAfterReset;
