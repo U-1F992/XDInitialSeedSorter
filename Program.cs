@@ -6,6 +6,13 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        // apply silent flag
+        bool flagSilent = (args.Contains("--silent") || args.Contains("-s"));
+        if (flagSilent)
+        {
+            Console.SetOut(TextWriter.Null);
+        }
+
         Directory.SetCurrentDirectory(AppContext.BaseDirectory);
         ConsoleExtensions.Enable();
 
@@ -19,6 +26,11 @@ public class Program
             Console.Error.WriteLine(e);
             Console.Error.WriteLine("接続できませんでした。setting.jsonを確認してください。");
             return;
+        }
+        // apply silent flag for stderr
+        if (flagSilent)
+        {
+            Console.SetError(TextWriter.Null);
         }
 
         long count = 1;
@@ -60,6 +72,13 @@ public class Program
 
         pkmnXD.Dispose();
 
+        // always show this message
+        if (flagSilent)
+        {
+            StreamWriter stdOut = new StreamWriter(Console.OpenStandardOutput());
+            Console.SetOut(stdOut);
+            stdOut.AutoFlush = true;
+        }
         Console.WriteLine("{{\"currentSeed\":{0},\"targetSeed\":{1}}}", currentSeed, targetSeed);
     }
 }
