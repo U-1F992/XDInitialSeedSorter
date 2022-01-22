@@ -7,7 +7,6 @@ public class Program
     {
         Directory.SetCurrentDirectory(AppContext.BaseDirectory);
         ConsoleExtensions.Enable();
-        Console.OutputEncoding = System.Text.Encoding.UTF8;
 
         XDConnecter pkmnXD;
         try
@@ -31,7 +30,7 @@ public class Program
         {
             do
             {
-                pkmnXD.ClearScreen();
+                Console.WriteLine("");
                 Console.WriteLine("--- Attempt: {0} ---", count);
                 Console.WriteLine("");
 

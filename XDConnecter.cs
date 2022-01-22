@@ -24,9 +24,8 @@ public partial class XDConnecter : IDisposable
 
     public void ClearScreen()
     {
-        Console.OutputEncoding = System.Text.Encoding.UTF8;
         string ESC = Char.ConvertFromUtf32(27);
-        Console.WriteLine("{0}[0;0H{0}[J", ESC);
+        Console.WriteLine("");
         Console.WriteLine("                 {0}[31m_{0}[0m      {0}[31;40m--{0}[0m", ESC);
         Console.WriteLine("{0}[0m                 {0}[31;40m\\ \\{0}[0m  {0}[31;40m / /{0}[0m", ESC);
         Console.WriteLine("{0}[0m  {0}[34;43m┏━┓{0}[0m {0}[34;43m┏┓┏━┓{0}[0m       {0}[31;40m\\ \\_/ /{0}[0m {0}[31m____{0}[0m", ESC);
@@ -35,7 +34,6 @@ public partial class XDConnecter : IDisposable
         Console.WriteLine("{0}[0m  {0}[34;43m┗┛┗━┻┻┻━┻┻┻┻━┻┻┛{0}[31;40m_/{0}[43m   {0}[31;40m\\ | |{0}[43m  {0}[31;40m| |{0}[0m", ESC);
         Console.WriteLine("{0}[0m   {0}[43m   {0}[30m{0}[3mGale of Darkness{0}[0m{0}[43m  {0}[31;40m\\| |{0}[31;43m_{0}[31;40m/ /{0}[0m", ESC);
         Console.WriteLine("{0}[0m {0}[31;43m========================{0}[31;40m|____/{0}[0m", ESC);
-        Console.WriteLine("");
         Console.WriteLine("");
     }
 
