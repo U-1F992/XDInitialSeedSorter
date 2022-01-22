@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Pastel;
+using PokemonPRNG.LCG32.GCLCG;
 
 public class Program
 {
@@ -23,10 +24,10 @@ public class Program
         long count = 1;
         TimeSpan waitingTime;
 
-        UInt32 currentSeed;
-        UInt32 targetSeed;
+        UInt32 currentSeed = 0;
+        UInt32 targetSeed = 0;
 
-        while (true)
+        do
         {
             do
             {
@@ -55,7 +56,7 @@ public class Program
                     // nothing to do but reset...
                 }
             }
-        }
+        } while (targetSeed.GetIndex(currentSeed) > (4294967295 / 2)); // this might prevent the program from exiting if over-consume would occur.
 
         pkmnXD.Dispose();
 
