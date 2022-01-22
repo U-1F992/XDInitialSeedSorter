@@ -1,0 +1,3 @@
+[submodule "GCController"]
+	path = GCController
+	url = https://github.com/mukai1011/GCController.git
