@@ -1,12 +1,13 @@
 ﻿using System.Diagnostics;
 using System.Text.RegularExpressions;
 using PokemonPRNG.LCG32.GCLCG;
+using GCControllerLibrary;
 
 public partial class XDConnecter : IDisposable
 {
     private Setting _setting;
     private GCController _controller;
-    private GCCapture _capture;
+    private XDCapture _capture;
     private int _delayAfterReset;
 
     private bool _disposed = false;
@@ -17,7 +18,7 @@ public partial class XDConnecter : IDisposable
 
         this._setting = VerifySetting(setting);
         this._controller = new GCController(_setting.devices.controller.port, GCResetMethod.BXSt);
-        this._capture = new GCCapture(_setting);
+        this._capture = new XDCapture(_setting);
 
         this._delayAfterReset = _setting.devices.controller.delayAfterReset;
     }

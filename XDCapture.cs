@@ -5,59 +5,19 @@ using Fastenshtein;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 
-public class GCCapture : IDisposable
+public class XDCapture : GCCapture
 {
-    private VideoCapture _videoCapture;
-    private Thread _threadUpdate;
-    private bool _showImage;
-    private bool _continueUpdateing = true;
-    private Mat _frame = new Mat();
     private string _tesseract;
     private Dictionary<string, Setting.Rect> _crops;
     
-    private bool _disposed = false;
-
     /// <summary>
     /// キャプチャデバイスから画像を取得します。
     /// </summary>
     /// <param name="setting">Setting.Devices.Captureオブジェクト</param>
-    public GCCapture(Setting setting)
+    public XDCapture(Setting setting) : base(setting.devices.capture.index, new System.Drawing.Size(setting.devices.capture.width, setting.devices.capture.height), setting.devices.capture.showImage)
     {
         this._tesseract = setting.binaries.tesseractOCR;
         this._crops = setting.crops;
-        this._showImage = setting.devices.capture.showImage;
-
-        try
-        {
-            this._videoCapture = new VideoCapture(setting.devices.capture.index);
-            if (!_videoCapture.IsOpened())
-            {
-                _videoCapture.Release();
-                throw new Exception();
-            }
-
-            _videoCapture.FrameWidth = setting.devices.capture.width;
-            _videoCapture.FrameHeight = setting.devices.capture.height;
-        }
-        catch
-        {
-            throw new Exception("キャプチャデバイスを取得できませんでした。");
-        }
-
-        this._threadUpdate = new Thread(new ThreadStart(this.UpdateFrame));
-        _threadUpdate.Start();
-    }
-
-    /// <summary>
-    /// キャプチャデバイスから画像を取得します。
-    /// </summary>
-    /// <returns>Matオブジェクト</returns>
-    Mat GetImage()
-    {
-        lock (_frame)
-        {
-            return _frame;
-        }
     }
 
     public QuickBattleData GetQuickBattleData()
@@ -147,50 +107,5 @@ public class GCCapture : IDisposable
             return i;
         }
         throw new Exception();
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-    }
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!_disposed)
-        {
-            if (disposing)
-            {
-                _continueUpdateing = false;
-                _threadUpdate.Join();
-                _videoCapture.Dispose();
-            }
-            _disposed = true;
-        }
-    }
-
-    private void UpdateFrame()
-    {
-        Mat resized = new Mat();
-        Window? window;
-        if (_showImage) {
-            window = new Window("XDInitialSeedSorter");
-        }
-        else {
-            window = null;
-        }
-
-        while (_continueUpdateing)
-        {
-            lock (_frame)
-            {
-                if(!_videoCapture.Read(_frame)) continue;
-                if (window != null)
-                {
-                    Cv2.Resize(_frame, resized, new Size(640, 480));
-                    window.ShowImage(resized);
-                    Cv2.WaitKey(1);
-                }
-            }
-        }
-        if (window != null) window.Dispose();
     }
 }

@@ -52,11 +52,11 @@ public class Setting
     }
 
     public class Rect
-        {
-            public int width { get; set; }
-            public int height { get; set; }
-            public int x { get; set; }
-            public int y { get; set; }
-        }
+    {
+        public int width { get; set; }
+        public int height { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
+    }
 }
 #pragma warning restore CS8618

@@ -14,13 +14,13 @@
     <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.5.5.20211231" />
     <PackageReference Include="Pastel" Version="3.0.0" />
     <PackageReference Include="PokemonPRNG" Version="3.2.0" />
-    <PackageReference Include="System.IO.Ports" Version="6.0.0" />
     
     <None Update="setting.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GCController\GCController.csproj" />
+    <ProjectReference Include="..\GCCapture\GCCapture.csproj" />
   </ItemGroup>
 
 </Project>
