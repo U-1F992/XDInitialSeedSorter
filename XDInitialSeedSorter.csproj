@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Narwhal\Narwhal.csproj" />
-    <ProjectReference Include="..\QuickBattleData\QuickBattleData.csproj" />
+    <ProjectReference Include="..\XDQuickBattleData\XDQuickBattleData.csproj" />
     <ProjectReference Include="..\XDCapture\XDCapture.csproj" />
     <ProjectReference Include="..\GCCapture\GCCapture.csproj" />
   </ItemGroup>

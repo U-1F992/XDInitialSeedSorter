@@ -37,7 +37,7 @@ namespace PokemonXD
                 public int index { get; set; }
                 public int width { get; set; }
                 public int height { get; set; }
-                public bool showImage { get; set; }
+                public bool visible { get; set; }
                 public Dictionary<string, Dictionary<string, int>> crops { get; set; }
             }
         }
