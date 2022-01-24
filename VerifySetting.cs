@@ -18,7 +18,7 @@ namespace PokemonXD
                 setting.devices.controller == null ||
                 setting.devices.controller.port == null ||
                 setting.devices.capture == null ||
-                setting.crops == null
+                setting.devices.capture.crops == null
             ) throw new Exception("設定の形式に誤りがあります。");
 
             // Pathが通っているか確認する

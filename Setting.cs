@@ -7,7 +7,6 @@ namespace PokemonXD
         public PokemonXD pokemonXD { get; set; }
         public Binaries binaries { get; set; }
         public Devices devices { get; set; }
-        public Dictionary<string, Rect> crops { get; set; }
 
         public class PokemonXD
         {
@@ -39,27 +38,8 @@ namespace PokemonXD
                 public int width { get; set; }
                 public int height { get; set; }
                 public bool showImage { get; set; }
+                public Dictionary<string, Dictionary<string, int>> crops { get; set; }
             }
-        }
-
-        public class Crops
-        {
-            public Rect player { get; set; }
-            public Rect com { get; set; }
-            public Rect hp_1 { get; set; }
-            public Rect hp_2 { get; set; }
-            public Rect hp_3 { get; set; }
-            public Rect hp_4 { get; set; }
-
-            
-        }
-
-        public class Rect
-        {
-            public int width { get; set; }
-            public int height { get; set; }
-            public int x { get; set; }
-            public int y { get; set; }
         }
     }
 }

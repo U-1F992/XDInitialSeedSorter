@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
+using System.Drawing;
 using System.Text.RegularExpressions;
 using PokemonPRNG.LCG32.GCLCG;
-using GCControllerLibrary;
+using Narwhal;
 
 namespace PokemonXD
 {
@@ -20,7 +21,7 @@ namespace PokemonXD
 
             this._setting = VerifySetting(setting);
             this._controller = new GCController(_setting.devices.controller.port, GCResetMethod.BXSt);
-            this._capture = new XDCapture(_setting);
+            this._capture = new XDCapture(_setting.devices.capture.index, new Size(_setting.devices.capture.width, _setting.devices.capture.height), _setting.devices.capture.crops, _setting.devices.capture.showImage, _setting.binaries.tesseractOCR);
 
             this._delayAfterReset = _setting.devices.controller.delayAfterReset;
         }
