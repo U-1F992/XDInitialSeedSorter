@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GCController\GCController.csproj" />
     <ProjectReference Include="..\GCCapture\GCCapture.csproj" />
+    <ProjectReference Include="..\QuickBattleData\QuickBattleData.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using Pastel;
 using PokemonPRNG.LCG32.GCLCG;
+using PokemonXD;
 
 public class Program
 {
