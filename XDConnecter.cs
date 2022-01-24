@@ -104,9 +104,9 @@ namespace PokemonXD
 
             _controller.InvokeSequence(new GCOperation[]
             {
-                new GCOperation(GCButton.A, 50, 1000),
-                new GCOperation(GCButton.B, 50, 500),
-                new GCOperation(GCButton.A, 50, 1000)
+                new GCOperation(GCButton.A, 100, 1000),
+                new GCOperation(GCButton.B, 100, 500),
+                new GCOperation(GCButton.A, 100, 1000)
             });
             data1 = _capture.GetQuickBattleData();
             Console.WriteLine(data1.ToJson());
@@ -115,8 +115,8 @@ namespace PokemonXD
             {
                 _controller.InvokeSequence(new GCOperation[]
                 {
-                    new GCOperation(GCButton.B, 50, 500),
-                    new GCOperation(GCButton.A, 50, 1000)
+                    new GCOperation(GCButton.B, 100, 500),
+                    new GCOperation(GCButton.A, 100, 1000)
                 });
                 data2 = _capture.GetQuickBattleData();
                 Console.WriteLine(data2.ToJson());
@@ -144,13 +144,13 @@ namespace PokemonXD
             _controller.Reset(_delayAfterReset - 15000);
             _controller.InvokeSequence(new GCOperation[]
             {
-                new GCOperation(GCButton.A, 50, 19000),
-                new GCOperation(GCButton.A, 50, 1800),
-                new GCOperation(GCButton.A, 50, 1200),
-                new GCOperation(GCButton.dR, 50, 1000),
-                new GCOperation(GCButton.A, 50, 1500),
-                new GCOperation(GCButton.A, 50, 2500),
-                new GCOperation(GCButton.A, 50, 500)
+                new GCOperation(GCButton.A, 100, 19000),
+                new GCOperation(GCButton.A, 100, 1800),
+                new GCOperation(GCButton.A, 100, 1200),
+                new GCOperation(GCButton.dR, 100, 1000),
+                new GCOperation(GCButton.A, 100, 1500),
+                new GCOperation(GCButton.A, 100, 2500),
+                new GCOperation(GCButton.A, 100, 500)
             });
 
             return GetCurrentSeed();
@@ -224,8 +224,8 @@ namespace PokemonXD
             {
                 _controller.InvokeSequence(new GCOperation[]
                 {
-                    new GCOperation(GCButton.B, 50, 500),
-                    new GCOperation(GCButton.A, 50, 1000)
+                    new GCOperation(GCButton.B, 100, 500),
+                    new GCOperation(GCButton.A, 100, 1000)
                 });
 
                 data = _capture.GetQuickBattleData();
@@ -240,8 +240,8 @@ namespace PokemonXD
             {
                 GCOperation.PressSt,
                 GCOperation.PressdD,
-                new GCOperation(GCButton.A, 50, 12000),
-                new GCOperation(GCButton.B, 50, 5000)
+                new GCOperation(GCButton.A, 100, 12000),
+                new GCOperation(GCButton.B, 100, 5000)
             });
             Console.WriteLine("Consumption complete.");
             Console.WriteLine("");
