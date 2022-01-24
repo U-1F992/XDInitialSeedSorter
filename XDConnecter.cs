@@ -5,7 +5,7 @@ using PokemonPRNG.LCG32.GCLCG;
 public partial class XDConnecter : IDisposable
 {
     private Setting _setting;
-    private XDController _controller;
+    private GCController _controller;
     private GCCapture _capture;
     private int _delayAfterReset;
 
@@ -16,7 +16,7 @@ public partial class XDConnecter : IDisposable
         ClearScreen();
 
         this._setting = VerifySetting(setting);
-        this._controller = new XDController(_setting);
+        this._controller = new GCController(_setting.devices.controller.port, GCResetMethod.BXSt);
         this._capture = new GCCapture(_setting);
 
         this._delayAfterReset = _setting.devices.controller.delayAfterReset;
@@ -137,7 +137,7 @@ public partial class XDConnecter : IDisposable
     {
         // Lead to the first page
         // 「いますぐバトル > さいきょう」
-        _controller.Reset(_delayAfterReset);
+        _controller.Reset(_delayAfterReset - 15000);
         _controller.InvokeSequence(new GCOperation[]
         {
             new GCOperation(GCButton.A, 50, 19000),

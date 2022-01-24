@@ -19,4 +19,8 @@
     <None Update="setting.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GCController\GCController.csproj" />
+  </ItemGroup>
+
 </Project>
