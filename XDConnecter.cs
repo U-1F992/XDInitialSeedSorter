@@ -28,16 +28,14 @@ namespace PokemonXD
 
         public void ClearScreen()
         {
-            string ESC = Char.ConvertFromUtf32(27);
             Console.WriteLine("");
-            Console.WriteLine("                 {0}[31m_{0}[0m      {0}[31;40m--{0}[0m", ESC);
-            Console.WriteLine("{0}[0m                 {0}[31;40m\\ \\{0}[0m  {0}[31;40m / /{0}[0m", ESC);
-            Console.WriteLine("{0}[0m  {0}[34;43m┏━┓{0}[0m {0}[34;43m┏┓┏━┓{0}[0m       {0}[31;40m\\ \\_/ /{0}[0m {0}[31m____{0}[0m", ESC);
-            Console.WriteLine("{0}[0m  {0}[34;43m┃┃┣━┫┣┫━┣━━┳━┳━┓ {0}[31;40m> _ <{0}[43m {0}[31;40m|  _ \\{0}[0m", ESC);
-            Console.WriteLine("{0}[0m  {0}[34;43m┃┏┫┃┃ ┫━┫┃┃┃┃┃┃┃{0}[31;40m/ /{0}[43m {0}[31;40m\\ \\| |{0}[43m {0}[31;40m\\ \\{0}[0m", ESC);
-            Console.WriteLine("{0}[0m  {0}[34;43m┗┛┗━┻┻┻━┻┻┻┻━┻┻┛{0}[31;40m_/{0}[43m   {0}[31;40m\\ | |{0}[43m  {0}[31;40m| |{0}[0m", ESC);
-            Console.WriteLine("{0}[0m   {0}[43m   {0}[30m{0}[3mGale of Darkness{0}[0m{0}[43m  {0}[31;40m\\| |{0}[31;43m_{0}[31;40m/ /{0}[0m", ESC);
-            Console.WriteLine("{0}[0m {0}[31;43m========================{0}[31;40m|____/{0}[0m", ESC);
+            Console.WriteLine("                                            /^^        ");
+            Console.WriteLine(" ___       _      __                /^^   /^^/^^^^^    ");
+            Console.WriteLine("| . \\ ___ | |__ _/_/._ _ _  ___ ._ _ /^^ /^^ /^^   /^^ ");
+            Console.WriteLine("|  _// . \\| / // ._>| ' ' |/ . \\| ' |  /^^   /^^    /^^");
+            Console.WriteLine("|_|  \\___/|_\\_\\\\___.|_|_|_|\\___/|_|_|/^^ /^^ /^^    /^^");
+            Console.WriteLine("        Gale    of    Darkness      /^^   /^^/^^   /^^ ");
+            Console.WriteLine("  -----===========================/^^========/^^^^^    ");
             Console.WriteLine("");
         }
 
@@ -248,6 +246,18 @@ namespace PokemonXD
             Console.WriteLine("");
 
             return;
+        }
+
+        /// <summary>
+        /// this might prevent the program from exiting when over-consume would occur.
+        /// </summary>
+        /// <param name="currentSeed"></param>
+        /// <param name="targetSeed"></param>
+        /// <returns></returns>
+        public bool IsLeftEnough(UInt32 currentSeed, UInt32 targetSeed)
+        {
+            var index = targetSeed.GetIndex(currentSeed);
+            return _setting.pokemonXD.leftover <= index && index < (4294967295 / 2);
         }
 
         public void Dispose()

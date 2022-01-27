@@ -53,24 +53,28 @@ public class Program
 
             } while (waitingTime > TimeSpan.Parse("03:00:00"));
 
+            Console.WriteLine("Suitable seed is found!");
             if (waitingTime > TimeSpan.Parse("00:05:00"))
             {
                 try
                 {
-                    Console.WriteLine("Suitable seed is found!");
-                    
+                    currentSeed = 0;
+                    targetSeed = 0;
+
                     pkmnXD.InvokeRoughConsumption(waitingTime - TimeSpan.Parse("00:05:00"));
+                    
                     currentSeed = pkmnXD.GetCurrentSeed();
                     targetSeed = pkmnXD.GetWaitingTimes(currentSeed).OrderBy(pair => pair.Value).First().Key;
                     break;
                 }
-                catch
+                catch (Exception e)
                 {
+                    Console.WriteLine(e);
                     // never supposed to be here
                     // nothing to do but reset...
                 }
             }
-        } while (targetSeed.GetIndex(currentSeed) > (4294967295 / 2)); // this might prevent the program from exiting if over-consume would occur.
+        } while (!pkmnXD.IsLeftEnough(currentSeed, targetSeed));
 
         pkmnXD.Dispose();
 
