@@ -198,8 +198,9 @@ namespace PokemonXD
             {
                 result = GetWaitingTimes(GetNextInitialSeed());
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 Console.WriteLine("No candidates were found.");
                 return TimeSpan.MaxValue;
             }

@@ -53,12 +53,13 @@ public class Program
 
             } while (waitingTime > TimeSpan.Parse("03:00:00"));
 
-            Console.WriteLine("Suitable seed is found!");
-            if (waitingTime > TimeSpan.Parse("00:02:30"))
+            if (waitingTime > TimeSpan.Parse("00:05:00"))
             {
                 try
                 {
-                    pkmnXD.InvokeRoughConsumption(waitingTime - TimeSpan.Parse("00:02:30"));
+                    Console.WriteLine("Suitable seed is found!");
+                    
+                    pkmnXD.InvokeRoughConsumption(waitingTime - TimeSpan.Parse("00:05:00"));
                     currentSeed = pkmnXD.GetCurrentSeed();
                     targetSeed = pkmnXD.GetWaitingTimes(currentSeed).OrderBy(pair => pair.Value).First().Key;
                     break;
