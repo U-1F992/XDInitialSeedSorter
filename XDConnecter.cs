@@ -28,15 +28,15 @@ namespace PokemonXD
 
         public void ClearScreen()
         {
-            Console.WriteLine("");
-            Console.WriteLine("                                            /^^        ");
-            Console.WriteLine(" ___       _      __                /^^   /^^/^^^^^    ");
-            Console.WriteLine("| . \\ ___ | |__ _/_/._ _ _  ___ ._ _ /^^ /^^ /^^   /^^ ");
-            Console.WriteLine("|  _// . \\| / // ._>| ' ' |/ . \\| ' |  /^^   /^^    /^^");
-            Console.WriteLine("|_|  \\___/|_\\_\\\\___.|_|_|_|\\___/|_|_|/^^ /^^ /^^    /^^");
-            Console.WriteLine("        Gale    of    Darkness      /^^   /^^/^^   /^^ ");
-            Console.WriteLine("  -----===========================/^^========/^^^^^    ");
-            Console.WriteLine("");
+            Console.WriteLine(@"
+                                            /^^        
+ ___       _      __                /^^   /^^/^^^^^    
+| . \ ___ | |__ _/_/._ _ _  ___ ._ _ /^^ /^^ /^^   /^^ 
+|  _// . \| / // ._>| ' ' |/ . \| ' |  /^^   /^^    /^^
+|_|  \___/|_\_\\___.|_|_|_|\___/|_|_|/^^ /^^ /^^    /^^
+        Gale    of    Darkness      /^^   /^^/^^   /^^ 
+  -----===========================/^^========/^^^^^    
+");
         }
 
         /// <summary>
