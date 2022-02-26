@@ -21,6 +21,10 @@
   <ItemGroup>
     <PackageReference Include="Pastel" Version="3.0.0" />
     <PackageReference Include="PokemonPRNG" Version="3.2.0" />
+    <PackageReference Include="Fastenshtein" Version="1.0.0.8" />
+    <PackageReference Include="OpenCvSharp4" Version="4.5.5.20211231" />
+    <PackageReference Include="OpenCvSharp4.Extensions" Version="4.5.5.20211231" />
+    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.5.5.20211231" />
     
     <None Update="setting.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
@@ -28,7 +32,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Narwhal\Narwhal.csproj" />
     <ProjectReference Include="..\XDQuickBattleData\XDQuickBattleData.csproj" />
-    <ProjectReference Include="..\XDCapture\XDCapture.csproj" />
     <ProjectReference Include="..\GCCapture\GCCapture.csproj" />
   </ItemGroup>
 
